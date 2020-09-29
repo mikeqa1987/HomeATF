@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File name extension must be .runsettings -->
+<RunSettings>
+  <TestRunParameters>
+    <Parameter name="ServerName" value="lab02" />
+    <Parameter name="ServerUrl" value="http://lab02:4723" />
+    <Parameter name="PlatformName" value="Windows" />
+    <Parameter name="ApplicationPath" value="notepad.exe" />
+    <Parameter name="ApplicationTitle" value="Untitled - Notepad" />
+    <Parameter name="LogFilePath" value="C:/Work/HomeATFLogs/${shortdate}.log" />
+    <Parameter name="ScreenshotsFolder" value="C:/Work/HomeATFWorkFolder/screenshots/"/>
+    <Parameter name="TryAttemptsFindOrClose" value="15" />
+    <Parameter name="DefaultTimeDelay" value="3" />
+    <Parameter name="NewCommandTimeout" value="90"/>
+  </TestRunParameters>
+</RunSettings>
