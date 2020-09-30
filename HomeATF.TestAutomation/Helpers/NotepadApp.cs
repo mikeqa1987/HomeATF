@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using HomeATF.Appium;
 using HomeATF.Appium.Interfaces;
-using HomeATF.Elements.Notepad;
 using HomeATF.Elements.Notepad;
 
 namespace HomeATF.TestAutomation.Helpers
@@ -13,6 +12,7 @@ namespace HomeATF.TestAutomation.Helpers
         private readonly string appTitle;
         private ITestContext testContext;
         private WindowsRootWindow appWindow;
+
         public NotepadApp(ITestContext testContext, string appTitle)
         {
             this.testContext = testContext;
@@ -89,10 +89,28 @@ namespace HomeATF.TestAutomation.Helpers
             var openButton = openDialog.FindElement<ButtonElement>((By.NameProperty, "Open"));
 
             this.testContext.AwaitingService.WaitFor(() => { return openButton.UiInstance.IsVisible; }, TimeSpan.FromSeconds(10));
-            openButton.PressKey(Keys.Enter);
+            openButton.PressKey(Keys.Enter);            
 
-            
+        }
 
+        public string GetStatusBarValue()
+        {
+            Element statusBar = null;
+
+            try
+            {
+                statusBar = this.appWindow.FindElement<Element>((By.AutomationIdProperty, "1025"));
+            }
+            catch
+            {
+                var viewMenu = this.appWindow.FindElement<ViewMenu>();
+                viewMenu.EnableStatusBar();
+            }
+
+            statusBar = this.appWindow.FindElement<Element>((By.AutomationIdProperty, "1025"));
+            var textBar = statusBar.FindAllElements<Element>((By.LocalizedControlTypeProperty, "text")).Skip(1).FirstOrDefault();
+
+            return textBar.Name;
         }
 
     }

@@ -55,6 +55,7 @@
     <Compile Include="Elements\FileMenu.cs" />
     <Compile Include="Elements\MenuBar.cs" />
     <Compile Include="Elements\TextEditor.cs" />
+    <Compile Include="Elements\ViewMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotepadElementFactory.cs" />
   </ItemGroup>

@@ -10,6 +10,7 @@ using System.Runtime.Remoting.Services;
 using HomeATF.Elements.Notepad.Elements;
 using HomeATF.Appium;
 using HomeATF.Elements.Notepad;
+using System.Threading;
 
 namespace HomeATF.TestAutomation.Tests
 {
@@ -77,6 +78,47 @@ namespace HomeATF.TestAutomation.Tests
             string expectedText = "This text is absolutely invalid.\r\nThis text is absolutely invalid.";
 
             Assert.AreEqual(expectedText, textEditor.CurrentText);
+        }
+
+        public void StatusBarTest()
+        {
+            var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
+
+            var currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 1, Col 1  ", currentValue);
+
+            notepadApp.TextEditor.TypeText("A");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 1, Col 2  ", currentValue);
+
+            notepadApp.TextEditor.TypeText("B");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 1, Col 3  ", currentValue);
+
+            notepadApp.TextEditor.TypeText("C");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 1, Col 4  ", currentValue);
+
+            notepadApp.TextEditor.NewLine();
+
+            notepadApp.TextEditor.TypeText("D");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 2, Col 2  ", currentValue);
+
+            notepadApp.TextEditor.TypeText("E");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 2, Col 3  ", currentValue);
+
+            notepadApp.TextEditor.TypeText("F");
+            currentValue = notepadApp.GetStatusBarValue();
+            Assert.AreEqual("   Ln 2, Col 4  ", currentValue);
+
+            for (int i = 0; i < 200; i++)
+            {
+                notepadApp.TextEditor.Click(i, i);
+                Thread.Sleep(500);
+            }
+            
         }
     }
 }

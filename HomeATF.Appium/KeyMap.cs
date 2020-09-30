@@ -11,6 +11,7 @@ namespace HomeATF.Appium
         public static Dictionary<Keys, string> AppKeyMap = new Dictionary<Keys, string>
         {
             { Keys.Windows, OpenQA.Selenium.Keys.Meta},
+            { Keys.End, OpenQA.Selenium.Keys.End},
             { Keys.Enter, OpenQA.Selenium.Keys.Enter},
             { Keys.Alt, OpenQA.Selenium.Keys.Alt},
             { Keys.F4, OpenQA.Selenium.Keys.F4},

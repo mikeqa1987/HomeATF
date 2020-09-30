@@ -25,6 +25,8 @@ namespace HomeATF.Appium.Interfaces
 
         void Click();
 
+        void Click(MouseButton button, int xOffset, int yOffset);
+
         void PressKey(Keys key);
 
         void MouseHover();

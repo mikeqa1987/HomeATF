@@ -35,5 +35,11 @@ namespace HomeATF.Elements.Notepad
         {
             this.SendKeys(text);
         }
+
+        public void NewLine()
+        {
+            this.uiWrapper.PressKey(Keys.End);
+            this.uiWrapper.PressKey(Keys.Enter);
+        }
     }
 }

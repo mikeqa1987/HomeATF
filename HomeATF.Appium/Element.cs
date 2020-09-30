@@ -111,6 +111,12 @@ namespace HomeATF.Appium
             this.UiInstance.Click();
         }
 
+        public void Click(int xOffset, int yOffset)
+        {
+            this.WaitForEnabled();
+            this.UiInstance.Click(MouseButton.Left, xOffset, yOffset);
+        }
+
         public void PressKeysCombination(Keys key, char c)
         {
             this.UiInstance.PressKeysCombination(key, c);

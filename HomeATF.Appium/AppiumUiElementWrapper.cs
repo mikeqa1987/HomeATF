@@ -438,8 +438,32 @@ namespace HomeATF.Appium
         public void Click()
         {
             this.Logger.Trace("{wrapper}: Click on the element: {name}", nameof(AppiumUiElementWrapper), this.Name);
-            
-            this.windowsElement?.Click();
+
+            this.Click(MouseButton.Left, 0, 0);
+        }
+
+        public void Click(MouseButton mButton, int xOffset, int yOffset)
+        {
+            var actions = new Actions(this.Driver);
+
+            actions.MoveToElement(this.windowsElement);
+
+            if (xOffset != 0 || yOffset != 0)
+            {
+                actions.MoveByOffset(xOffset, yOffset);
+            }
+
+            if (mButton == MouseButton.Left)
+            {
+                actions.Click();
+            }
+            else
+            {
+                actions.ContextClick();
+            }
+
+            actions.Build().Perform();
+
         }
 
         public void MouseHover()

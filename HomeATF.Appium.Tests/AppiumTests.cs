@@ -24,6 +24,9 @@ namespace HomeATF.Appium.Tests
         [Test]
         public void ReplaceTextTest() => this.tests.ReplaceTextTest();
 
+        [Test]
+        public void StatusBarTest() => this.tests.StatusBarTest();
+
         
     }
 }

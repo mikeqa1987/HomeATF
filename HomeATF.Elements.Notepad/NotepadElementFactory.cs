@@ -4,9 +4,7 @@ using HomeATF.Elements.Notepad.Elements;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HomeATF.Elements.Notepad
 {
@@ -32,6 +30,10 @@ namespace HomeATF.Elements.Notepad
             else if (type == typeof(EditMenu))
             {
                 return new EditMenu(wrapper, navigator, eFactory, logger) as T;
+            }
+            else if (type == typeof(ViewMenu))
+            {
+                return new ViewMenu(wrapper, navigator, eFactory, logger) as T;
             }
             else if (type == typeof(TextEditor))
             {
@@ -65,6 +67,11 @@ namespace HomeATF.Elements.Notepad
             {
                 yield return (By.LocalizedControlTypeProperty, "menu item");
                 yield return (By.NameProperty, "Edit");
+            }
+            else if (type == typeof(ViewMenu))
+            {
+                yield return (By.LocalizedControlTypeProperty, "menu item");
+                yield return (By.NameProperty, "View");
             }
             else if (type == typeof(TextEditor))
             {
