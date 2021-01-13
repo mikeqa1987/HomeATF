@@ -80,6 +80,20 @@ namespace HomeATF.TestAutomation.Tests
             Assert.AreEqual(expectedText, textEditor.CurrentText);
         }
 
+        public void MenuItemsTest()
+        {
+            var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
+
+            var menuBar = notepadApp.GetRootWindow().FindElement<MenuBar>();
+            var fileMenu = notepadApp.GetRootWindow().FindElement<FileMenu>();
+
+            Assert.That(fileMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "File",
+                ParentElement = menuBar,
+            }));
+        }
+
         public void StatusBarTest()
         {
             var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
