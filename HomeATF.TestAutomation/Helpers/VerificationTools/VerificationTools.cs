@@ -60,6 +60,23 @@ namespace HomeATF.TestAutomation
             }
             errorDesc += error;
 
+            if (!expected.VerifyItemsQuantity(actualElement, out error))
+            {
+                result = false;
+            }
+            errorDesc += error;
+
+            if (!expected.VerifyItems(actualElement, out error))
+            {
+                result = false;
+            }
+            errorDesc += error;
+
+            if (!expected.VerifyAccessKey(actualElement, out error))
+            {
+                result = false;
+            }
+            errorDesc += error;
             return result;
         }
     }

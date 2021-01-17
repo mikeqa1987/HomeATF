@@ -85,12 +85,30 @@ namespace HomeATF.TestAutomation.Tests
             var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
 
             var menuBar = notepadApp.GetRootWindow().FindElement<MenuBar>();
-            var fileMenu = notepadApp.GetRootWindow().FindElement<FileMenu>();
+            var menuItemsCollection = menuBar.FindAllElements<Element>((By.LocalizedControlTypeProperty, "menu item"));
+
+            Assert.AreEqual(5, menuItemsCollection.Count(), "Menu items count is not equal to expected");
+            var fileMenu = menuItemsCollection.FirstOrDefault();
 
             Assert.That(fileMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
             {
                 Label = "File",
                 ParentElement = menuBar,
+                ItemsQuantity = 7,
+                AccessKey = "Alt+f",
+                Items = new string[] { "New\tCtrl+N", "Open...\tCtrl+O", "Save\tCtrl+S", "Save As...", "Page Setup...", "Print...\tCtrl+P", "Exit"}
+            }));
+
+            var editMenu = menuBar.FindAllElements<Element>((By.LocalizedControlTypeProperty, "menu item"))
+                .Skip(1).FirstOrDefault();
+
+            Assert.That(editMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "Edit",
+                ParentElement = menuBar,
+                ItemsQuantity = 11,
+                AccessKey = "Alt+e",
+                Items = new string[] { "Undo", "Cut", "Copy", "Paste", "Delete", "Find...", "Find Next", "Replace...", "Go To...", "Select All", "Time/Date" }
             }));
         }
 
