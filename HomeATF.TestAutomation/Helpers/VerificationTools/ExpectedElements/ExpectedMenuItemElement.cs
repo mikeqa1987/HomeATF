@@ -83,7 +83,7 @@ namespace HomeATF.TestAutomation
                     result = false;
                 }
             }
-
+            actualElement.Click();
             return result;
         }
 
