@@ -27,6 +27,10 @@ namespace HomeATF.Appium.Tests
         [Test]
         public void StatusBarTest() => this.tests.StatusBarTest();
 
-        
+        [Test]
+        public void MenuItemsTest() => this.tests.MenuItemsTest();
+
+
+
     }
 }

@@ -80,6 +80,74 @@ namespace HomeATF.TestAutomation.Tests
             Assert.AreEqual(expectedText, textEditor.CurrentText);
         }
 
+        /// <summary>
+        /// Test Menu Items layout.
+        /// </summary>
+        public void MenuItemsTest()
+        {
+            var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
+
+            var menuBar = notepadApp.GetRootWindow().FindElement<MenuBar>();
+            var menuItemsCollection = menuBar.FindAllElements<Element>((By.LocalizedControlTypeProperty, "menu item"));
+            int menuCount = menuItemsCollection.Count();
+
+            Assert.AreEqual(5, menuCount, $"Actual menu items count \"{menuCount}\" is not equal to expected count 5");
+            var fileMenu = menuItemsCollection.FirstOrDefault();
+
+            Assert.That(fileMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "File",
+                ParentElement = menuBar,
+                ItemsQuantity = 7,
+                AccessKey = "Alt+f",
+                Items = new string[] { "New\tCtrl+N", "Open...\tCtrl+O", "Save\tCtrl+S", "Save As...", "Page Setup...", "Print...\tCtrl+P", "Exit"}
+            }));
+
+            var editMenu = menuItemsCollection.Skip(1).FirstOrDefault();
+
+            Assert.That(editMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "Edit",
+                ParentElement = menuBar,
+                ItemsQuantity = 11,
+                AccessKey = "Alt+e",
+                Items = new string[] { "Undo\tCtrl+Z", "Cut\tCtrl+X", "Copy\tCtrl+C", "Paste\tCtrl+V", "Delete\tDel", "Find...\tCtrl+F", "Find Next\tF3", "Replace...\tCtrl+H", "Go To...\tCtrl+G", "Select All\tCtrl+A", "Time/Date\tF5" }
+            }));
+
+            var formatMenu = menuItemsCollection.Skip(2).FirstOrDefault();
+
+            Assert.That(formatMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "Format",
+                ParentElement = menuBar,
+                ItemsQuantity = 2,
+                AccessKey = "Alt+o",
+                Items = new string[] { "Word Wrap", "Font..." }
+            }));
+
+            var viewMenu = menuItemsCollection.Skip(3).FirstOrDefault();
+
+            Assert.That(viewMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "View",
+                ParentElement = menuBar,
+                ItemsQuantity = 1,
+                AccessKey = "Alt+v",
+                Items = new string[] { "Status Bar" }
+            }));
+
+            var helpMenu = menuItemsCollection.Skip(4).FirstOrDefault();
+
+            Assert.That(helpMenu, NotepadConstraints.MenuItemConstraint(new ExpectedMenuItemElement()
+            {
+                Label = "Help",
+                ParentElement = menuBar,
+                ItemsQuantity = 2,
+                AccessKey = "Alt+h",
+                Items = new string[] { "View Help", "About Notepad" }
+            }));
+        }
+
         public void StatusBarTest()
         {
             var notepadApp = new NotepadApp(this.Context, "Untitled - Notepad");
